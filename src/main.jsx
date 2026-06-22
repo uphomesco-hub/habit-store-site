@@ -1,6 +1,6 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import { ArrowRight, CheckCircle2, Mail, MapPin, MessageCircle } from "lucide-react";
+import { ArrowRight, CheckCircle2, Mail } from "lucide-react";
 import "./styles.css";
 
 const asset = (fileName) => `${import.meta.env.BASE_URL}assets/${fileName}`;
@@ -13,12 +13,12 @@ const productVariants = [
   },
   {
     title: "Sensory & Oral Fixations",
-    copy: "A safe alternative for teens, people with special mental and physical needs with oral-focus issues.",
+    copy: "A safe alternative for people with special mental and physical oral-focus issues.",
     image: asset("troll-cake.png"),
   },
   {
     title: "Speech & Tongue Exercise",
-    copy: "A tool to help Speech Therapists and families coach their clients and loved ones with structured tongue and mouth movement positioning.",
+    copy: "A tool to help Speech Therapists and families coach their clients and loved ones with structured tongue and mouth movements.",
     image: asset("troll-drink.png"),
   },
 ];
@@ -34,9 +34,9 @@ const productLoop = [
   "Break the loop",
   "Redirect the urge",
   "Get Con-Troll",
-  "Train the tongue",
-  "Support oral focus",
-  "Build a better routine",
+  "Train the brain",
+  "Add alternatives",
+  "Build better routines",
 ];
 
 function App() {
@@ -155,7 +155,7 @@ function HomePage({ onNavigate }) {
           </div>
 
           <div className="hero-copy">
-            <p>Tools to Help You Beat Bad Habits</p>
+            <p>Tools to Help You Grab Con-Troll of Bad Habits</p>
             <div className="actions">
               <a className="button primary" href="#contact" onClick={onNavigate}>
                 Start a conversation <ArrowRight size={18} />
@@ -186,7 +186,6 @@ function HomePage({ onNavigate }) {
       <section className="panel section support-section" id="support">
         <div>
           <p className="eyebrow">Who We Help</p>
-          <h2>Built for everyday urges, oral focus, and guided support habits.</h2>
           <p className="support-copy">
             The Habit Store gives people tools to keep their mouth, hands, and attention focused
             when a habit loop starts.
@@ -206,6 +205,13 @@ function HomePage({ onNavigate }) {
         <div className="section-heading">
           <p className="eyebrow">First Product Family</p>
           <h2>One Tool - Many Twists</h2>
+          <div className="habit-twister-cta">
+            <span>Habit Twister</span>
+            <p>Are you ready to Twist your Bad Habit away?</p>
+            <a href="https://www.habittwister.com" target="_blank" rel="noreferrer">
+              Click here <ArrowRight size={18} />
+            </a>
+          </div>
         </div>
         <div className="product-grid">
           {productVariants.map((item, index) => (
@@ -240,24 +246,12 @@ function ContactPage({ sent, setSent }) {
   return (
     <section className="panel contact-page">
       <div className="contact-copy">
-        <p className="eyebrow">Contact us</p>
-        <h1>Have a question about Con-Troll tools?</h1>
-        <p>
-          Use this page for product questions, wholesale interest, speech therapy use cases,
-          caregiver questions, or store inquiries.
-        </p>
+        <p className="eyebrow">Contact Us</p>
+        <h1>Contact via the form or email below:</h1>
         <div className="contact-points">
           <p>
             <Mail size={20} />
             hello@habit-store.com
-          </p>
-          <p>
-            <MessageCircle size={20} />
-            Product and partnership inquiries
-          </p>
-          <p>
-            <MapPin size={20} />
-            Online launch store coming soon
           </p>
         </div>
       </div>
@@ -277,15 +271,6 @@ function ContactPage({ sent, setSent }) {
         <label>
           Email
           <input name="email" type="email" placeholder="you@example.com" required />
-        </label>
-        <label>
-          I am interested in
-          <select name="interest" defaultValue="Product question">
-            <option>Product question</option>
-            <option>Therapy or clinic use</option>
-            <option>Wholesale or retail</option>
-            <option>Future launch updates</option>
-          </select>
         </label>
         <label>
           Message
