@@ -8,26 +8,26 @@ const asset = (fileName) => `${import.meta.env.BASE_URL}assets/${fileName}`;
 const productVariants = [
   {
     title: "Habit Support",
-    copy: "A simple hand-and-mouth routine for people working on cravings, nail biting, smoking triggers, or fidget habits.",
+    copy: "A simple hand-and-mouth tool to help you with unwanted habit triggers such as smoking, vaping, chewing, or obsessive fidgeting.",
     image: asset("troll-smoke.png"),
   },
   {
-    title: "Sensory & Oral Fixation",
-    copy: "A more welcoming way to talk about safe oral-focus tools for teens, adults, caregivers, and support teams.",
+    title: "Sensory & Oral Fixations",
+    copy: "A safe alternative for teens, people with special mental and physical needs with oral-focus issues.",
     image: asset("troll-cake.png"),
   },
   {
     title: "Speech & Tongue Exercise",
-    copy: "Useful positioning for speech therapists and families exploring structured tongue and mouth movement routines.",
+    copy: "A tool to help Speech Therapists and families coach their clients and loved ones with structured tongue and mouth movement positioning.",
     image: asset("troll-drink.png"),
   },
 ];
 
 const notes = [
-  "For people redirecting cravings, nail biting, smoking triggers, or fidget habits",
-  "For teens and adults who want a simple oral-focus routine",
-  "For parents, caregivers, and support teams looking for sensory-friendly tools",
-  "For speech therapy and tongue-exercise routines guided by a professional",
+  "For people redirecting cravings, nail biting, smoking triggers, or fidget habits.",
+  "For teens and adults who want a simple oral-focus routine.",
+  "For parents, caregivers, and support teams looking for sensory-friendly tools.",
+  "For speech therapy and tongue-exercise routines guided by a professional.",
 ];
 
 const productLoop = [
@@ -131,11 +131,11 @@ function Header({ page, onNavigate }) {
         </span>
       </a>
       <nav aria-label="Main navigation">
-        <a href="#product" onClick={onNavigate}>
-          Product
-        </a>
         <a href="#support" onClick={onNavigate}>
-          Who it helps
+          Who We Help
+        </a>
+        <a href="#product" onClick={onNavigate}>
+          Products
         </a>
         <a href="#contact" className={page === "contact" ? "active" : ""} onClick={onNavigate}>
           Contact
@@ -155,13 +155,13 @@ function HomePage({ onNavigate }) {
           </div>
 
           <div className="hero-copy">
-            <p>Friendly tools for habits, oral focus, and tongue exercise.</p>
+            <p>Tools to Help You Beat Bad Habits</p>
             <div className="actions">
               <a className="button primary" href="#contact" onClick={onNavigate}>
                 Start a conversation <ArrowRight size={18} />
               </a>
               <a className="button secondary" href="#product" onClick={onNavigate}>
-                See the first line
+                See Our Introductory Product Line
               </a>
             </div>
           </div>
@@ -183,28 +183,12 @@ function HomePage({ onNavigate }) {
         </div>
       </section>
 
-      <section className="panel section product-section" id="product">
-        <div className="section-heading">
-          <p className="eyebrow">First product family</p>
-          <h2>One tool, multiple ways to position it.</h2>
-        </div>
-        <div className="product-grid">
-          {productVariants.map((item, index) => (
-            <article className="product-card" key={item.title} style={{ "--card-delay": `${index * 80}ms` }}>
-              <img src={item.image} alt={`${item.title} Con-Troll character`} />
-              <h3>{item.title}</h3>
-              <p>{item.copy}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
       <section className="panel section support-section" id="support">
         <div>
-          <p className="eyebrow">Who it helps</p>
-          <h2>Built for everyday urges, oral focus, and guided support routines.</h2>
+          <p className="eyebrow">Who We Help</p>
+          <h2>Built for everyday urges, oral focus, and guided support habits.</h2>
           <p className="support-copy">
-            The Habit Store gives people a friendly way to keep their mouth, hands, and attention busy
+            The Habit Store gives people tools to keep their mouth, hands, and attention focused
             when a habit loop starts.
           </p>
         </div>
@@ -214,6 +198,22 @@ function HomePage({ onNavigate }) {
               <CheckCircle2 size={20} />
               {note}
             </p>
+          ))}
+        </div>
+      </section>
+
+      <section className="panel section product-section" id="product">
+        <div className="section-heading">
+          <p className="eyebrow">First Product Family</p>
+          <h2>One Tool - Many Twists</h2>
+        </div>
+        <div className="product-grid">
+          {productVariants.map((item, index) => (
+            <article className="product-card" key={item.title} style={{ "--card-delay": `${index * 80}ms` }}>
+              <img src={item.image} alt={`${item.title} Con-Troll character`} />
+              <h3>{item.title}</h3>
+              <p>{item.copy}</p>
+            </article>
           ))}
         </div>
       </section>
