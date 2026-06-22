@@ -451,7 +451,7 @@ p {
 
 .habit-twister-cta {
   display: inline-grid;
-  gap: 6px;
+  gap: 8px;
   margin-top: 8px;
   border: 1px solid var(--line);
   border-radius: 18px;
@@ -460,12 +460,10 @@ p {
   box-shadow: 0 14px 32px rgba(22, 21, 16, 0.08);
 }
 
-.habit-twister-cta span {
-  color: var(--gold);
-  font-size: 12px;
-  font-weight: 950;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+.habit-twister-cta img {
+  width: clamp(128px, 12vw, 190px);
+  height: auto;
+  object-fit: contain;
 }
 
 .habit-twister-cta p {
@@ -1217,6 +1215,10 @@ p {
   .habit-twister-cta {
     width: 100%;
     margin-top: 10px;
+  }
+
+  .habit-twister-cta img {
+    width: 132px;
   }
 
   .product-card {

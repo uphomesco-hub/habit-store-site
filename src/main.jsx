@@ -206,7 +206,7 @@ function HomePage({ onNavigate }) {
           <p className="eyebrow">First Product Family</p>
           <h2>One Tool - Many Twists</h2>
           <div className="habit-twister-cta">
-            <span>Habit Twister</span>
+            <img src={asset("habit-twister-logo.png")} alt="Habit Twister logo" />
             <p>Are you ready to Twist your Bad Habit away?</p>
             <a href="https://www.habittwister.com" target="_blank" rel="noreferrer">
               Click here <ArrowRight size={18} />
