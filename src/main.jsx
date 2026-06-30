@@ -251,7 +251,7 @@ function ContactPage({ sent, setSent }) {
         <div className="contact-points">
           <p>
             <Mail size={20} />
-            hello@habit-store.com
+            info@habit-store.com
           </p>
         </div>
       </div>
