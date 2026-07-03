@@ -190,7 +190,7 @@ main {
   align-content: center;
   width: 100%;
   min-height: 0;
-  padding-bottom: clamp(22px, 3.2vh, 34px);
+  padding-bottom: clamp(10px, 2vh, 24px);
   opacity: var(--reveal-opacity);
   transform: translate3d(0, var(--reveal-y), 0) scale(var(--reveal-scale));
   transition:
@@ -202,7 +202,7 @@ main {
   display: grid;
   justify-items: center;
   max-width: 680px;
-  margin-top: clamp(-38px, -3.4vh, -18px);
+  margin-top: clamp(8px, 1.3vh, 18px);
   z-index: 4;
 }
 
@@ -258,7 +258,7 @@ p {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-top: clamp(30px, 3.8vh, 40px);
+  margin-top: clamp(22px, 3vh, 34px);
 }
 
 .button,
@@ -292,7 +292,7 @@ p {
   display: grid;
   place-items: center;
   width: min(740px, 100%);
-  min-height: clamp(300px, 38svh, 455px);
+  min-height: clamp(260px, 34svh, 420px);
   transform: translate3d(0, var(--media-y), 0) scale(var(--reveal-scale));
   transition: transform 760ms cubic-bezier(0.22, 1, 0.36, 1);
   will-change: transform;
@@ -682,6 +682,15 @@ p {
   outline: none;
 }
 
+.contact-form .botcheck {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .contact-form textarea {
   min-height: 92px;
   resize: vertical;
@@ -702,6 +711,16 @@ p {
   color: var(--deep-green);
   font-size: 14px;
   font-weight: 800;
+}
+
+.form-error {
+  background: #fff0ed;
+  color: #9b2c19;
+}
+
+.contact-form button:disabled {
+  cursor: wait;
+  opacity: 0.72;
 }
 
 @keyframes logoSettle {
@@ -829,7 +848,7 @@ p {
   .hero {
     height: 100svh;
     min-height: 100svh;
-    padding-bottom: clamp(36px, 4vh, 58px);
+    padding-bottom: 0;
   }
 }
 
@@ -848,7 +867,7 @@ p {
   }
 
   .hero-copy {
-    margin-top: -42px;
+    margin-top: 6px;
   }
 
   .hero-copy > p:not(.eyebrow) {
@@ -961,16 +980,16 @@ p {
 
   .hero-art {
     width: min(900px, 62vw);
-    min-height: clamp(420px, 44vh, 620px);
+    min-height: clamp(380px, 40vh, 560px);
   }
 
   .hero-logo {
-    width: min(720px, 42vw);
+    width: min(700px, 39vw);
   }
 
   .hero-copy {
     max-width: 860px;
-    margin-top: clamp(-54px, -3vh, -24px);
+    margin-top: clamp(8px, 1.2vh, 18px);
   }
 
   .hero-copy > p:not(.eyebrow) {

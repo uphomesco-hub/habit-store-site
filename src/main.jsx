@@ -243,6 +243,56 @@ function HomePage({ onNavigate }) {
 }
 
 function ContactPage({ sent, setSent }) {
+  const [submitting, setSubmitting] = React.useState(false);
+  const [error, setError] = React.useState("");
+  const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setError("");
+    setSent(false);
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    if (formData.get("botcheck")) return;
+
+    if (!accessKey) {
+      setError("The form key is missing. Add VITE_WEB3FORMS_ACCESS_KEY to .env.local.");
+      return;
+    }
+
+    setSubmitting(true);
+
+    try {
+      formData.append("access_key", accessKey);
+      formData.append("subject", "New Habit Store contact form message");
+      formData.append("from_name", "The Habit Store website");
+
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || "The message could not be sent.");
+      }
+
+      form.reset();
+      setSent(true);
+    } catch (submitError) {
+      const message =
+        submitError.message === "Failed to fetch"
+          ? "The message could not be sent. Please email info@habit-store.com or try again in a moment."
+          : submitError.message || "The message could not be sent. Please try again.";
+      setError(message);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <section className="panel contact-page">
       <div className="contact-copy">
@@ -258,12 +308,10 @@ function ContactPage({ sent, setSent }) {
 
       <form
         className="contact-form"
-        onSubmit={(event) => {
-          event.preventDefault();
-          setSent(true);
-        }}
+        onSubmit={handleSubmit}
       >
         <img src={asset("habit-store-logo.png")} alt="The Habit Store logo" />
+        <input type="checkbox" name="botcheck" className="botcheck" tabIndex="-1" autoComplete="off" />
         <label>
           Name
           <input name="name" placeholder="Your name" required />
@@ -276,8 +324,9 @@ function ContactPage({ sent, setSent }) {
           Message
           <textarea name="message" rows="5" placeholder="Tell us what you need help with." required />
         </label>
-        <button type="submit">Send message</button>
-        {sent && <p className="form-note">Thanks. The message UI is working; backend email can be connected next.</p>}
+        <button type="submit" disabled={submitting}>{submitting ? "Sending..." : "Send message"}</button>
+        {sent && <p className="form-note">Thanks. Your message was sent.</p>}
+        {error && <p className="form-note form-error">{error}</p>}
       </form>
     </section>
   );
