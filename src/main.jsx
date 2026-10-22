@@ -245,7 +245,8 @@ function HomePage({ onNavigate }) {
 function ContactPage({ sent, setSent }) {
   const [submitting, setSubmitting] = React.useState(false);
   const [error, setError] = React.useState("");
-  const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+  const accessKey =
+    import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || "030612a4-6506-4756-87c8-ce9bb5cf8105";
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -258,7 +259,7 @@ function ContactPage({ sent, setSent }) {
     if (formData.get("botcheck")) return;
 
     if (!accessKey) {
-      setError("The form key is missing. Add VITE_WEB3FORMS_ACCESS_KEY to .env.local.");
+      setError("The form is temporarily unavailable. Please email info@habit-store.com.");
       return;
     }
 
