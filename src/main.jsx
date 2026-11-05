@@ -4,23 +4,28 @@ import { ArrowRight, CheckCircle2, Mail } from "lucide-react";
 import "./styles.css";
 
 const asset = (fileName) => `${import.meta.env.BASE_URL}assets/${fileName}`;
+const homeSectionIds = new Set(["home", "support", "product", "how-it-works", "watch"]);
 
 const productVariants = [
   {
     title: "Habit Support",
-    copy: "A simple hand-and-mouth tool to help you with unwanted habit triggers such as smoking, vaping, chewing, or obsessive fidgeting.",
-    image: asset("troll-smoke.png"),
+    copy: "A silicone tool for redirecting unwanted habit triggers such as:",
+    examples: ["Smoking", "Vaping", "Chewing tobacco", "Mindless snacking"],
   },
   {
     title: "Sensory & Oral Fixations",
-    copy: "A safe alternative for people with special mental and physical oral-focus issues.",
-    image: asset("troll-cake.png"),
+    copy: "An oral fidget for people seeking sensory input and an alternative focus for their hands and mouth.",
   },
   {
     title: "Speech & Tongue Exercise",
-    copy: "A tool to help Speech Therapists and families coach their clients and loved ones with structured tongue and mouth movements.",
-    image: asset("troll-drink.png"),
+    copy: "For speech therapists and families supporting professionally guided tongue and mouth exercises.",
   },
+];
+
+const usageSteps = [
+  { title: "Pinch It", copy: "Pinch the sides to open the cherry’s mouth." },
+  { title: "Pack It", copy: "Insert a small candy or pouch into the cherry’s mouth." },
+  { title: "Place It", copy: "Place it in your mouth. Bite it, roll it, fidget." },
 ];
 
 const notes = [
@@ -55,7 +60,7 @@ function App() {
     }
 
     if (window.location.hash !== "#contact") {
-      if (window.location.hash && window.location.hash !== "#home") {
+      if (window.location.hash && !homeSectionIds.has(window.location.hash.slice(1))) {
         window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}#home`);
       }
       window.scrollTo(0, 0);
@@ -68,10 +73,9 @@ function App() {
     const onHashChange = () => {
       const nextPage = getPageFromHash();
       const id = window.location.hash.replace("#", "");
-      const cameFromSiteClick = internalNavigation.current;
       internalNavigation.current = false;
 
-      if (nextPage === "home" && id && id !== "home" && !cameFromSiteClick) {
+      if (nextPage === "home" && id && !homeSectionIds.has(id)) {
         window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}#home`);
         window.scrollTo({ top: 0, behavior: "auto" });
         setPage("home");
@@ -203,25 +207,51 @@ function HomePage({ onNavigate }) {
 
       <section className="panel section product-section" id="product">
         <div className="section-heading">
-          <p className="eyebrow">First Product Family</p>
           <h2>One Tool - Many Twists</h2>
-          <div className="habit-twister-cta">
-            <img src={asset("habit-twister-logo.png")} alt="Habit Twister logo" />
-            <p>Are you ready to Twist your Bad Habit away?</p>
-            <a href="https://www.habittwister.com" target="_blank" rel="noreferrer">
-              Click here <ArrowRight size={18} />
-            </a>
-          </div>
+          <p className="ht-product-intro">Meet Habit Twister.</p>
         </div>
         <div className="product-grid">
           {productVariants.map((item, index) => (
             <article className="product-card" key={item.title} style={{ "--card-delay": `${index * 80}ms` }}>
-              <img src={item.image} alt={`${item.title} Con-Troll character`} />
+              <div className="ht-product-visual">
+                <img className="ht-product-image" src={asset("habit-twister-product.png")} alt="Habit Twister, with a red cherry-shaped mouth and green stem" />
+              </div>
               <h3>{item.title}</h3>
               <p>{item.copy}</p>
+              {item.examples && <ul className="ht-habit-examples">{item.examples.map((example) => <li key={example}>{example}</li>)}</ul>}
             </article>
           ))}
         </div>
+        <a className="ht-section-link" href="#how-it-works" onClick={onNavigate}>See how it works <ArrowRight size={18} aria-hidden="true" /></a>
+      </section>
+
+      <section className="panel section ht-how-section" id="how-it-works" aria-labelledby="ht-how-title">
+        <div className="section-heading">
+          <h2 id="ht-how-title">How it works</h2>
+        </div>
+        <ol className="ht-steps">
+          {usageSteps.map((step, index) => (
+            <li key={step.title}>
+              <span className="ht-step-number" aria-hidden="true">0{index + 1}</span>
+              <h3>{step.title}</h3>
+              <p>{step.copy}</p>
+            </li>
+          ))}
+        </ol>
+        <p className="ht-use-note">For ages 13 and up. Follow the product’s supplied instructions.</p>
+        <a className="ht-section-link" href="#watch" onClick={onNavigate}>Watch Habit Twister in action <ArrowRight size={18} aria-hidden="true" /></a>
+      </section>
+
+      <section className="panel section ht-video-section" id="watch" aria-labelledby="ht-video-title">
+        <div className="section-heading">
+          <h2 id="ht-video-title">Habit Twister in action</h2>
+          <p className="ht-product-intro">A little twist to your everyday routine.</p>
+        </div>
+        <video className="ht-product-video" controls playsInline preload="metadata" poster={asset("habit-twister-poster.jpg")} aria-label="Habit Twister product demonstration">
+          <source src={asset("habit-twister-final.mp4")} type="video/mp4" />
+          Your browser does not support embedded video.
+        </video>
+        <a className="ht-section-link" href="#contact" onClick={onNavigate}>Questions about Habit Twister? Contact us <ArrowRight size={18} aria-hidden="true" /></a>
       </section>
 
       <section className="panel final-cta">
