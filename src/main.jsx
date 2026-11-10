@@ -28,6 +28,12 @@ const usageSteps = [
   { title: "Place It", copy: "Place it in your mouth. Bite it, roll it, fidget." },
 ];
 
+const productVideos = [
+  { slug: "snack-time", title: "Snack time" },
+  { slug: "taking-a-break", title: "Taking a break" },
+  { slug: "outdoors", title: "Outdoors" },
+];
+
 const notes = [
   "For people redirecting cravings, nail biting, smoking triggers, or fidget habits.",
   "For teens and adults who want a simple oral-focus routine.",
@@ -245,12 +251,23 @@ function HomePage({ onNavigate }) {
       <section className="panel section ht-video-section" id="watch" aria-labelledby="ht-video-title">
         <div className="section-heading">
           <h2 id="ht-video-title">Habit Twister in action</h2>
-          <p className="ht-product-intro">A little twist to your everyday routine.</p>
+          <p className="ht-product-intro">Three everyday routines. One little twist.</p>
         </div>
-        <video className="ht-product-video" controls playsInline preload="metadata" poster={asset("habit-twister-poster.jpg")} aria-label="Habit Twister product demonstration">
-          <source src={asset("habit-twister-final.mp4")} type="video/mp4" />
-          Your browser does not support embedded video.
-        </video>
+        <div className="ht-video-gallery">
+          {productVideos.map((video) => (
+            <figure className="ht-video-card" key={video.slug}>
+              <video className="ht-product-video" controls playsInline preload="none" poster={asset(`habit-twister-${video.slug}-poster.jpg`)} aria-label={`Habit Twister: ${video.title}`} onPlay={(event) => {
+                event.currentTarget.closest(".ht-video-gallery").querySelectorAll("video").forEach((other) => {
+                  if (other !== event.currentTarget) other.pause();
+                });
+              }}>
+                <source src={asset(`habit-twister-${video.slug}.mp4`)} type="video/mp4" />
+                Your browser does not support embedded video. <a href={asset(`habit-twister-${video.slug}.mp4`)}>Open the {video.title.toLowerCase()} video.</a>
+              </video>
+              <figcaption>{video.title}</figcaption>
+            </figure>
+          ))}
+        </div>
         <a className="ht-section-link" href="#contact" onClick={onNavigate}>Questions about Habit Twister? Contact us <ArrowRight size={18} aria-hidden="true" /></a>
       </section>
 

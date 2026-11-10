@@ -1509,6 +1509,26 @@ p {
   min-height: 100svh;
   background: #fbfaf3;
 }
+.ht-video-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+  gap: clamp(18px, 2.5vw, 36px);
+  width: min(100%, 1040px);
+}
+.ht-video-card {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  min-width: 0;
+  margin: 0;
+}
+.ht-video-card figcaption {
+  color: var(--deep-green);
+  font-size: 16px;
+  font-weight: 800;
+  text-align: center;
+}
 .ht-product-video {
   display: block;
   width: min(100%, 310px);
@@ -1541,6 +1561,7 @@ p {
   .ht-section-link { font-size: 14px; line-height: 1.5; }
   .ht-how-section { min-height: auto; }
   .ht-video-section { min-height: auto; }
+  .ht-video-gallery { grid-template-columns: 1fr; gap: 32px; }
   .ht-video-section .section-heading { margin-bottom: 24px; }
   .ht-product-video { width: min(100%, 300px); max-height: none; }
 }
